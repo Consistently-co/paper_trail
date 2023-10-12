@@ -100,6 +100,13 @@ module PaperTrail
             "Attribute #{k} does not exist on #{version.item_type} (Version id: #{version.id})."
           )
         end
+      rescue => error
+        if version.logger
+          version.logger.warn("Error Was Raised. Error Details: #{error.message}")
+          version.logger.warn(
+            "Attribute #{k} does not exist on #{version.item_type} (Version id: #{version.id})."
+          )
+        end
       end
 
       # Reify onto `model` all the attributes of `version`.
